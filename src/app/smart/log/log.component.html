@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Se connecter :</h1>
+<div mat-dialog-content [formGroup]="signInForm">
+    <mat-form-field class="form-element">
+        <mat-label>Email :</mat-label>
+        <input matInput formControlName="mail">
+        <mat-error *ngIf="!signInForm.controls['mail'].valid && signInForm.controls['mail'].touched">
+            {{ getErrorEmail() }}
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-element">
+        <mat-label>Mot de passe :</mat-label>
+        <input matInput formControlName="mdp" type="password">
+        <mat-error *ngIf="!signInForm.controls['mdp'].valid && signInForm.controls['mdp'].touched">
+            {{ getErrorPassword() }}
+        </mat-error>
+    </mat-form-field>
+</div>
+<mat-dialog-actions>
+    <button mat-button [disabled]="!signInForm.valid" class="mat-raised-button mat-primary" (click)="submitForm()">Se connecter</button>
+    <button mat-button class="mat-raised-button mat-primary" (click)="test()">Tester la connexion au serveur</button>
+</mat-dialog-actions> 
