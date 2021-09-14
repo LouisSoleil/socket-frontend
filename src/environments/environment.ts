@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  ws_url: 'http://localhost:3000'
+  s_url: 'http://localhost:3000',
+  ws_url: 'http://82.165.249.114/WBCOMMUNICATIONSOCKET_WEB'
 };
 
 /*

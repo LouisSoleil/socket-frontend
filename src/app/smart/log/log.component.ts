@@ -18,6 +18,7 @@ export class LogComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.test();
   }
 
   initForm(): void {
@@ -29,7 +30,8 @@ export class LogComponent implements OnInit {
   }
 
   test(): void {
-    this.socketS.test();
+    //this.socketS.log_socket();
+    this.socketS.get_all_user();
   }
 
   submitForm(): void {
