@@ -17,5 +17,11 @@
 </div>
 <mat-dialog-actions>
     <button mat-button [disabled]="!signInForm.valid" class="mat-raised-button mat-primary" (click)="submitForm()">Se connecter</button>
-    <button mat-button class="mat-raised-button mat-primary" (click)="test()">Tester la connexion au serveur</button>
+    <button mat-button class="mat-raised-button mat-primary" (click)="get_all_user()">Récupérer tous les utilisateurs</button>
 </mat-dialog-actions> 
+
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let user of listUser">
+        <pre>{{ user | json }}</pre>
+    </li>
+</ul>

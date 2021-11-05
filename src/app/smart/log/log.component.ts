@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { SocketService } from 'src/app/services/socket.service';
+import { UtilisateurService } from 'src/app/services/utilisateur.service';
 
 @Component({
   selector: 'app-log',
@@ -12,13 +13,29 @@ export class LogComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private socketS: SocketService) { }
+    private socketS: SocketService,
+    private utilisateurS: UtilisateurService) { }
 
     public signInForm: FormGroup;
+    public listUser: any;
+    public listUserObservable: Observable<any> = this.socketS.userListObservable;
 
   ngOnInit(): void {
     this.initForm();
-    this.test();
+  }
+
+  get_all_user(): void {
+    this.socketS.soapCall();
+    this.listUserObservable.subscribe(
+      (data) => {
+        this.listUser = data;
+        
+    });    
+  }
+
+  delete_array(): void{
+    this.listUser = [];
+    this.socketS.emitUserList(this.listUser);
   }
 
   initForm(): void {
@@ -27,11 +44,6 @@ export class LogComponent implements OnInit {
       mail: new FormControl('', [Validators.required, Validators.pattern(emailregex)]),
       mdp: new FormControl('', [Validators.required])
     })
-  }
-
-  test(): void {
-    //this.socketS.log_socket();
-    this.socketS.get_all_user();
   }
 
   submitForm(): void {
